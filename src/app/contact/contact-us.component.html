@@ -1,0 +1,119 @@
+<h2>Contactez nous !!</h2>
+<!--template drivent form qui permet
+dajouter des directives a nos imput
+pour pouvoir rendre le formulaire gerable
+les directives utilisé depend du module   
+FormsModule une template reference
+il est possible de creer des variable coté
+template a laide du # ailleur dans le template je peux
+me service de form et qui me gerer mon formulaire
+NgForm ca reprensente un objet qui reprensente lui meme 
+le formulaire et c fait auto pour nous des angular 2 il voit
+le tag form il lui associe un objet NgForm en utilisant
+le string interpolation like {{form.value|json}}
+-->
+<form #form="ngForm" (submit)="sendMessage(form)" novalidate>
+
+
+<!-- lorsque on rajoute ngModel on est obligé de rajouter un attribut name
+pour le referencer dans un objet json par exemple si on rajoute
+pas name il yaura une erreur une fois on rajoute lattribut name
+dans notre input l'affiche de notre form.value filtré par 
+un json nous permet d'associer la valeur de l'attribut name
+qui correspond a subject donc on aura comme valeur
+{subject:""}
+-->
+
+    <div class="form-group" 
+    [class.has-error]="msgSubject.touched && msgSubject.touched "  >
+            <label for="subject" class="control-label">Sujet</label>
+            <input type="text"
+                   #msgSubject="ngModel"
+                    
+                   name="subject"
+                   ngModel
+                
+                   required
+                   class ="form-control" 
+                   placeholder="Sujet"
+                   id ="subject">
+         <!--     <div  *ngIf="msgSubject.invalid && msgSubject.touched ">sujet manquant</div>
+            <div  *ngIf="!msgSubject.valid">sujet manquant</div>
+              <div *ngIf="isVisible">sujet manquant</div> 
+              la div qui contient la condition if
+              veut dire *ngIf="isVisible" si isVisible
+            =true affiche moi la div sujet manquant
+            si il est a false ne l'affiche pas
+            !msgSubject.valid c'est lequivalent
+            le point d'exclamation nous informe que 
+            laffichage se fera quand ce champsn'est pas valid
+            on peut l'enlever et on remplace la propriété
+            valid par invalid
+            la propriété touched correspond si elle a reçu
+            le focus ou perdu le focus,cliquer le focus
+            correspondre à un clic gauche ensuite aller sur un autre
+            champ message par exemple
+             -->   
+    </div>
+
+    <div class="form-group"
+    [class.has-error]="msgContent.touched && msgContent.touched " > 
+    
+   
+    
+            <label    for="message" class="control-label" >Message</label>
+            <textarea type="text"
+                   #msgContent="ngModel" 
+                      ngModel
+                      name="message"
+                      required
+                      class ="form-control" 
+                      >
+            </textarea>
+    </div>
+<!-- l -->
+    <div class="form-group">
+            <label    for="service">Service</label>
+            <select   name="service" 
+                      class ="form-control"
+                      ngModel 
+                      placeholder="Message" 
+                      id ="service">
+                         <option value ="tech">---</option>
+                         <option value ="tech">Technique</option>
+                         <option value ="sales">Commercial</option>
+                         <option value ="guide">Guide moyenne montage</option>
+            </select>
+    </div>
+    <button type="submit" class="btn btn-default"[disabled]="form.invalid"   >Envoyer </button>
+    <button type="button" class="btn btn-outline-primary" [disabled]="form.invalid" >Primary</button>
+    
+   
+
+
+<!-- notre formulaire gère trois type d'input grace a nos name 
+de l'attribut name une fois que l'utilisateur
+ecrit ou selectionne une valeur 
+cette valeur sera associé a name exemple {"subject":" ","message":" ","service":" "} -->
+
+</form>
+<!--{{form.value}} nous accedant a form.value via string
+ interpolation {{}} on aura l'affichage [object Object]
+ value est une propriété disposé par l'objet ngForm
+ lorsque nous rajoutant un filtre json ça
+ ngModel attribut marche uniquement lorsque on importe
+ Forms Module c'est très important
+ lors du rajout de l'attribut required sur nos
+ input on peut tester le formulaire grace
+ à notre string interpolation
+ la variable form elle a une propriété
+ invalid qu'on teste.
+
+
+
+-->
+<br>
+FormValue: {{form.value|json}}
+FormValid: {{form.valid|json}}
+<br>
+Sujet:{{msgSubject.valid}}

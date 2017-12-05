@@ -1,0 +1,61 @@
+<h2>Bienvenue sur le site du developpeur/randonneur</h2>
+
+  <div>
+  toute la journée assis dans un open space ?
+  il est temps de prendre l'air et d'aller randonner.
+  <br>
+  </div>
+  <button (click)="toggle()" *ngIf="open" class= "btn btn-danger" >fermer</button>
+  <button (click)="toggle()" *ngIf="!open" class="btn btn-primary" >ouvrir</button>  
+  
+
+  <div [@toggleElement]="toggleElement"> 
+    Well, the way they make shows is, 
+    they make one show. That show's called
+    a pilot. Then they show that show 
+    to the people who make shows, and on 
+    the strength of that one show they decide 
+    if they're going to make more shows. 
+    Some pilots get picked and become television 
+    programs. Some don't, become nothing. 
+    She starred in one of the ones that became nothing.
+    
+    </div>
+    <hr>
+    <div class ="row">
+          <h3>Citations</h3>
+          <div class="frame col-md-6">
+              <div class ="citation" [@animateCitation]="animateCitation"
+                                     (@animateCitation.start)="log($event)"
+                                     (animateCitation.done)  ="log($event)"
+               > 
+                     {{quote.text}}
+                       <br>
+                <em>{{quote.author}}</em>
+              </div>
+           </div>
+    </div>
+
+
+
+    <div class="row">
+            <div class="col-md-6">
+              <a class ="btn btn-primary" (click)="getPreviousQuote()">précedente</a>
+              <a class ="btn btn-primary"(click)="getNextQuote()">suivante</a>
+                          
+
+
+
+
+            </div>
+
+
+    </div>
+    
+   
+
+
+
+
+
+   

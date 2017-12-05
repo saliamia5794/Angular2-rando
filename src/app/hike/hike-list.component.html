@@ -1,0 +1,27 @@
+
+<h2>liste de randonnées </h2> <!--[routerLink]="['/hike',hike.id] cette directive nous permet de créer un lien avec un paramètre si on met pas hike.id sur chaque lien il y aura la redirection uniquement vers /hikes   -->
+<div>
+    Filtré par: <input type="text" [(ngModel)]="searchTerm" placeholder="mots clés">
+
+</div>
+<div *ngFor="let hike of hikes |hikeFilter:searchTerm"  ><a [routerLink]="['/hikes', hike.id]">{{hike.name|uppercase}} :</a> {{hike.description}}
+<!--routerLink a besoin d'angular router dans son module il faut l'importer dans import -->
+    <br>
+    <br>
+    <hike-summary [hike]="hike" (addhikeasfavorite)="addToMyTodoHike($event)"></hike-summary>
+    <!-- une chose importante a retenir pour pouvoir passer
+     des données à un component enfant on se serre des crochets 
+     dans lesquels le nom entre les crochets [hike] qui est le nom
+     de notre input parameters et on passe la valeur sur laquelle on itère
+     dans notre ngfor la c hike
+     si on veut changer le nom ce ce qu'il y a entre les crochets
+     dans la balise <hike-summary>  ex:[hike] on remplace
+     hike par hk mais on doit faire des changement
+     dans hiek-summary.component.ts  on appelant notre input
+     hk ensuite dans lhtml associé on change das les string
+     interpolation sans oublier les changement de l'id hk.id
+
+
+    
+    -->
+</div>
